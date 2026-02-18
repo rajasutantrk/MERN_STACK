@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced DOM Practice</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --primary: #2563eb;
+  --danger: #ef4444;
+  --success: #10b981;
+  --bg: #f9fafb;
+  --card: #ffffff;
+  --text: #1f2937;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s ease;
+}
+
+.dark-mode {
+  --bg: #111827;
+  --card: #1f2937;
+  --text: #f3f4f6;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.btn-primary { background: var(--primary); color: white; }
+.btn-danger { background: var(--danger); color: white; }
+.btn-success { background: var(--success); color: white; }
+
+button:hover { opacity: 0.9; transform: translateY(-2px); }
+
+input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  margin-right: 10px;
+}
+
+.product-card {
+  padding: 15px;
+  border-radius: 8px;
+  background: #e5e7eb;
+  margin-bottom: 10px;
+  transition: 0.2s ease;
+}
+
+.highlight { background: #fde68a; }
+
+.card {
+  padding: 15px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  margin-top: 10px;
+}
+
+.swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 8px;
+  border: 2px solid #fff;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn { from {opacity:0} to {opacity:1} }
+@keyframes slideUp { from {transform:translateY(30px)} to {transform:translateY(0)} }
+
+ul { padding-left: 20px; }
+
+li {
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1 id="header-title">DOM Manipulation Lab</h1>
+
+<div class="section">
+  <button id="theme-toggle" class="btn-primary">Toggle Dark Mode</button>
+</div>
+
+<div class="section">
+  <h3>Product Cards</h3>
+  <div class="product-card">Product A</div>
+  <div class="product-card">Product B</div>
+</div>
+
+<div class="section">
+  <h3>Todo List</h3>
+  <input id="todo-input" placeholder="Enter task">
+  <button id="add-todo" class="btn-success">Add</button>
+  <ul id="todo-list"></ul>
+</div>
+
+<div class="section">
+  <h3>Counter</h3>
+  <button id="decrease" class="btn-danger">-</button>
+  <span id="count">0</span>
+  <button id="increase" class="btn-success">+</button>
+</div>
+
+<div class="section">
+  <h3>Search Filter</h3>
+  <input id="search" placeholder="Search country">
+  <ul>
+    <li class="country">India</li>
+    <li class="country">Canada</li>
+    <li class="country">Germany</li>
+    <li class="country">Australia</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>Color Picker</h3>
+  <div class="swatch" data-color="#ef4444" style="background:#ef4444"></div>
+  <div class="swatch" data-color="#2563eb" style="background:#2563eb"></div>
+  <div class="swatch" data-color="#10b981" style="background:#10b981"></div>
+</div>
+
+<div class="section">
+  <h3>Sortable List</h3>
+  <ul id="sortable">
+    <li draggable="true">Task A</li>
+    <li draggable="true">Task B</li>
+    <li draggable="true">Task C</li>
+  </ul>
+</div>
+
+<div class="section">
+  <button id="open-modal" class="btn-primary">Open Modal</button>
+</div>
+
+</div>
+
+<script>
+
+// Change header
+document.getElementById("header-title").textContent = "My Awesome Page";
+
+// Add border to product cards
+document.querySelectorAll(".product-card").forEach(card => {
+  card.style.border = "2px solid var(--primary)";
+});
+
+// Dark mode
+document.getElementById("theme-toggle")
+.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
+
+// Todo List
+document.getElementById("add-todo").onclick = () => {
+  const input = document.getElementById("todo-input");
+  const value = input.value.trim();
+  if (!value) return;
+
+  const li = document.createElement("li");
+  li.innerHTML = `${value} <button class="btn-danger">Delete</button>`;
+  li.querySelector("button").onclick = () => li.remove();
+
+  document.getElementById("todo-list").appendChild(li);
+  input.value = "";
+};
+
+// Counter
+let count = 0;
+document.getElementById("increase").onclick = () => {
+  document.getElementById("count").textContent = ++count;
+};
+document.getElementById("decrease").onclick = () => {
+  if (count > 0)
+    document.getElementById("count").textContent = --count;
+};
+
+// Search filter
+document.getElementById("search")
+.addEventListener("input", e => {
+  const value = e.target.value.toLowerCase();
+  document.querySelectorAll(".country").forEach(li => {
+    li.style.display =
+      li.textContent.toLowerCase().includes(value)
+      ? ""
+      : "none";
+  });
+});
+
+// Color picker
+document.querySelectorAll(".swatch").forEach(swatch => {
+  swatch.onclick = () => {
+    document.body.style.backgroundColor = swatch.dataset.color;
+  };
+});
+
+// Drag & Drop
+let dragged;
+document.querySelectorAll("#sortable li").forEach(item => {
+  item.addEventListener("dragstart", () => dragged = item);
+  item.addEventListener("dragover", e => e.preventDefault());
+  item.addEventListener("drop", function() {
+    if (dragged !== this)
+      this.parentNode.insertBefore(dragged, this);
+  });
+});
+
+// Modal
+document.getElementById("open-modal").onclick = () => {
+  const overlay = document.createElement("div");
+  overlay.className = "modal-overlay";
+
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.innerHTML = `
+    <h3>Professional Modal</h3>
+    <p>This modal was created dynamically using JavaScript.</p>
+    <button class="btn-primary">Close</button>
+  `;
+
+  modal.querySelector("button").onclick = () => overlay.remove();
+  overlay.onclick = e => { if (e.target === overlay) overlay.remove(); };
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+};
+
+</script>
+
+</body>
+</html>
