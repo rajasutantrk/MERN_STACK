@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Job & Internship Opportunities</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #82bffc;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .type {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .company {
+      color: #007bff;
+      margin-bottom: 4px;
+    }
+
+    .location {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .deadline {
+      font-size: 13px;
+      color: #e63946;
+      margin-bottom: 10px;
+    }
+
+    .skills span {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3b5bdb;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin: 2px 4px 2px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Job & Internship Opportunities</h1>
+  <div class="container" id="jobsContainer"></div>
+
+  <script>
+    const data = {
+      "opportunities": [
+        {
+          "id": 1,
+          "type": "Internship",
+          "title": "Software Engineering Intern",
+          "company": "TechNova Labs",
+          "location": "Remote",
+          "duration": "3 months",
+          "stipend": 1200,
+          "currency": "USD",
+          "deadline": "2026-03-15",
+          "applyLink": "https://technova.example.com/careers/se-intern",
+          "skills": ["JavaScript", "React", "Git"],
+          "status": "Interested",
+          "notes": "Apply after updating resume"
+        },
+        {
+          "id": 2,
+          "type": "Job",
+          "title": "Junior Backend Developer",
+          "company": "CloudByte Inc",
+          "location": "New York, USA",
+          "salaryRange": "55000-70000",
+          "currency": "USD",
+          "deadline": "2026-04-01",
+          "applyLink": "https://cloudbyte.example.com/jobs/backend-junior",
+          "skills": ["Node.js", "PostgreSQL", "REST APIs"],
+          "status": "Applied",
+          "notes": "Referred by a friend"
+        },
+        {
+          "id": 3,
+          "type": "Internship",
+          "title": "Data Analyst Intern",
+          "company": "InsightWorks",
+          "location": "Hybrid - London",
+          "duration": "6 months",
+          "stipend": 900,
+          "currency": "GBP",
+          "deadline": "2026-03-05",
+          "applyLink": "https://insightworks.example.com/internships/data-analyst",
+          "skills": ["Python", "SQL", "Excel"],
+          "status": "Saved",
+          "notes": "Prepare portfolio"
+        },
+        {
+          "id": 4,
+          "type": "Job",
+          "title": "UI/UX Designer",
+          "company": "PixelForge Studio",
+          "location": "Berlin, Germany",
+          "salaryRange": "48000-62000",
+          "currency": "EUR",
+          "deadline": "2026-03-28",
+          "applyLink": "https://pixelforge.example.com/careers/uiux",
+          "skills": ["Figma", "User Research", "Prototyping"],
+          "status": "Interested",
+          "notes": "Strong portfolio needed"
+        },
+        {
+          "id": 5,
+          "type": "Internship",
+          "title": "Marketing Intern",
+          "company": "BrightWave Media",
+          "location": "Remote",
+          "duration": "2 months",
+          "stipend": 600,
+          "currency": "USD",
+          "deadline": "2026-02-29",
+          "applyLink": "https://brightwave.example.com/internships/marketing",
+          "skills": ["Content Writing", "Social Media", "Canva"],
+          "status": "Saved",
+          "notes": "Shortlisted by recruiter"
+        }
+      ]
+    };
+
+    const container = document.getElementById("jobsContainer");
+
+    data.opportunities.forEach(job => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const skillsHTML = job.skills.map(skill => `<span>${skill}</span>`).join("");
+
+      card.innerHTML = `
+        <div class="type">${job.type}</div>
+        <div class="title">${job.title}</div>
+        <div class="company">${job.company}</div>
+        <div class="location">📍 ${job.location}</div>
+        <div class="deadline">⏰ Apply by: ${job.deadline}</div>
+        <div class="skills">${skillsHTML}</div>
+        <a class="btn" href="${job.applyLink}" target="_blank">Apply Now</a>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

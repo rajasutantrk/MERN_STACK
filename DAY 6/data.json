@@ -1,0 +1,82 @@
+{
+  "opportunities": [
+    {
+      "id": 1,
+      "type": "Internship",
+      "title": "Software Engineering Intern",
+      "company": "TechNova Labs",
+      "location": "Remote",
+      "duration": "3 months",
+      "stipend": 1200,
+      "currency": "USD",
+      "deadline": "2026-03-15",
+      "applyLink": "https://technova.example.com/careers/se-intern",
+      "skills": ["JavaScript", "React", "Git"],
+      "status": "Interested",
+      "notes": "Apply after updating resume"
+    },
+    {
+      "id": 2,
+      "type": "Job",
+      "title": "Junior Backend Developer",
+      "company": "CloudByte Inc",
+      "location": "New York, USA",
+      "salaryRange": "55000-70000",
+      "currency": "USD",
+      "deadline": "2026-04-01",
+      "applyLink": "https://cloudbyte.example.com/jobs/backend-junior",
+      "skills": ["Node.js", "PostgreSQL", "REST APIs"],
+      "status": "Applied",
+      "notes": "Referred by a friend"
+    },
+    {
+      "id": 3,
+      "type": "Internship",
+      "title": "Data Analyst Intern",
+      "company": "InsightWorks",
+      "location": "Hybrid - London",
+      "duration": "6 months",
+      "stipend": 900,
+      "currency": "GBP",
+      "deadline": "2026-03-05",
+      "applyLink": "https://insightworks.example.com/internships/data-analyst",
+      "skills": ["Python", "SQL", "Excel"],
+      "status": "Saved",
+      "notes": "Prepare portfolio"
+    },
+    {
+      "id": 4,
+      "type": "Job",
+      "title": "UI/UX Designer",
+      "company": "PixelForge Studio",
+      "location": "Berlin, Germany",
+      "salaryRange": "48000-62000",
+      "currency": "EUR",
+      "deadline": "2026-03-28",
+      "applyLink": "https://pixelforge.example.com/careers/uiux",
+      "skills": ["Figma", "User Research", "Prototyping"],
+      "status": "Interested",
+      "notes": "Strong portfolio needed"
+    },
+    {
+      "id": 5,
+      "type": "Internship",
+      "title": "Marketing Intern",
+      "company": "BrightWave Media",
+      "location": "Remote",
+      "duration": "2 months",
+      "stipend": 600,
+      "currency": "USD",
+      "deadline": "2026-02-29",
+      "applyLink": "https://brightwave.example.com/internships/marketing",
+      "skills": ["Content Writing", "Social Media", "Canva"],
+      "status": "Saved",
+      "notes": "Shortlisted by recruiter"
+    }
+  ],
+  "filters": {
+    "types": ["Job", "Internship"],
+    "locations": ["Remote", "Hybrid", "On-site"],
+    "statuses": ["Saved", "Interested", "Applied", "Rejected", "Offer"]
+  }
+}
